@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, Response, flash
+from flask import Flask, request, render_template, Response, flash, jsonify
 import requests
 import base64
 from tinydb import TinyDB, Query
@@ -119,7 +119,7 @@ def getImg():
   y = random.randint(0, x)
   link = checked_images[y - 1]["link"]
   #print(db.all()[y - 1])
-  return link
+  return jsonify({"link":link})
 
 
 # route to update img check status to True
