@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <img id="slika" width="400px" />
+    <div id="title"></div>
+    <div id="summary"></div>
+    <div id="img"></div>
+    <div id="date"></div>
+    <div id="pocitnice"></div>
+    <script>
+      //ajax call
+      function refreshImg(params) {
+        $.ajax({
+          url: "/getImg",
+          success: function (result) {
+            $("#slika").attr("src", result);
+          },
+        });
+      }
+      function refreshNews() {
+        $.ajax({
+          url: "/refreshNews",
+        });
+      }
+
+      function getOneNews() {
+        $.ajax({
+          url: "/getOneNews",
+          success: function (result) {
+            console.log(result);
+            $("#title").html(result.title);
+            $("#summary").html(result.summary);
+            $("#img").html("<img src='" + result.img + "'>");
+            $("#date").html(result.date);
+          },
+        });
+      }
+
+      function timeTill(vacationDates) {
+        const now = new Date();
+
+        let nextVacationDate = vacationDates[0];
+        for (let i = 1; i < vacationDates.length; i++) {
+          if (vacationDates[i] > now) {
+            nextVacationDate = vacationDates[i];
+            break;
+          }
+        }
+
+        const timeDifference = nextVacationDate - now;
+
+        const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor(
+          (timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
+        );
+        const minutes = Math.floor(
+          (timeDifference % (1000 * 60 * 60)) / (1000 * 60),
+        );
+        const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+        return {
+          days: days,
+          hours: hours,
+          minutes: minutes,
+          seconds: seconds,
+        };
+      }
+
+      const pocitnice = [
+        new Date("2024-04-01"),
+        new Date("2024-05-15"),
+        new Date("2024-06-20"),
+      ];
+
+      let timeUntil = timeTill(pocitnice);
+      console.log(timeUntil);
+      $("#pocitnice").text = timeUntil.days;
+
+      setInterval("refreshImg()", 2000);
+      setInterval("refreshNews()", 1000 * 60 * 60 * 2);
+      setInterval("getOneNews()", 2000);
+    </script>
+  </body>
+</html>
