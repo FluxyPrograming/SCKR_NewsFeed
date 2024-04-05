@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import axios from "axios";
 import HeaderComp from "./components/HeaderComp";
+import { BodyComp } from "./components/BodyComp";
 
 function App() {
   const fetchApi = async () => {
@@ -12,6 +13,7 @@ function App() {
   return (
     <>
       <HeaderComp />
+      <BodyComp />
     </>
   );
 }

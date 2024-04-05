@@ -25,7 +25,7 @@ function HeaderComp() {
           </div>
         </div>
         <div className="flex-grow"></div>
-        <div className="bg-purple-500 p-2"></div>
+        <div className="bg-purple-500 p-2">Weather</div>
       </header>
     </>
   );
