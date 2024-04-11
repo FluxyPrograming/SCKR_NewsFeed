@@ -7,7 +7,7 @@ function HeaderComp() {
   const GetTime = () => {
     let today = new Date();
     setDate(today.toLocaleDateString("sl", { month: "long", day: "numeric" }));
-    setTime(today.toLocaleTimeString());
+    setTime(today.toLocaleTimeString("sl"));
   };
   setInterval(GetTime, 1000);
   return (
