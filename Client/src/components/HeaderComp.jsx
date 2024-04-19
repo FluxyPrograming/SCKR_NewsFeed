@@ -12,7 +12,7 @@ function HeaderComp() {
   setInterval(GetTime, 1000);
   return (
     <>
-      <header className="bg-slate-400 w-dvw h-36 flex items-center p-10">
+      <header className="bg-slate-400 w-full h-32 flex items-center p-10">
         <div className="p-2 font-mono flex flex-col">
           <div className="flex flex-row">
             <ClockIcon />
